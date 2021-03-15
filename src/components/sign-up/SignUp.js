@@ -28,6 +28,8 @@ function SignUp() {
         password
       );
 
+      console.log(displayName);
+
       await createUserProfileDocument(user, { displayName });
 
       setSignUpDetails({
@@ -58,6 +60,7 @@ function SignUp() {
           value={displayName}
           onChange={handleChange}
           label="Display Name"
+          autoComplete="off"
           required
         />
 
