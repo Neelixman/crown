@@ -7,7 +7,11 @@ import { auth } from '../../firebase/firebase.utils'
 
 import './header.scss'
 
-function Header({ currentUser }) {
+// Components
+import CartIcon from '../cart-icon/CartIcon'
+import CartDropdown from '../cart-dropdown/CartDropdown'
+
+function Header({ currentUser, hidden }) {
   useEffect(() => {
     console.log(currentUser)
   }, [currentUser])
@@ -33,13 +37,16 @@ function Header({ currentUser }) {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   )
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 })
 
 export default connect(mapStateToProps)(Header)
